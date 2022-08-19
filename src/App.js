@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [ newItem, setNewItem ] = useState("");
+  const [items, setItems ] = useState("");
+
+  const handleItemSubmit = (e) => {
+    e.preventDefault();
+    setItems([...items, newItem])
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={(e) => { handleItemSubmit(e); }}>
+        <input onChange={(e) => { setNewItem(e.target.value); }}/>
+        <div>
+          <button>Add</button>
+        </div>
+      </form>
+        
     </div>
   );
 }
