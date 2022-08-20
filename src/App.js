@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Item from './components/Item';
 
 function App() {
   const [ newItem, setNewItem ] = useState("");
@@ -39,22 +40,22 @@ function App() {
       <form onSubmit={(e) => { handleItemSubmit(e); }}>
         <input onChange={(e) => { setNewItem(e.target.value); }} type="text" value={newItem}/>
         <div>
-          <button>Add</button>
+          <button className="add-button">Add</button>
         </div>
       </form>
       {/*map the Items to a string and display them*/}
        {
       item.map((item, i) => {
         return (
-        <div key={i}> 
-          {/*connect the state of the check with the todoItem*/}
-          <input onChange={(e) => { handleBooleanComplete(i);}} 
-              checked={item.complete} type="checkbox" readOnly/>
-          <span>{item.text}</span>
-          <button onClick={() => removeItem(i)}>Delete</button>
-        </div>
+          <Item key ={i} 
+          i={i} 
+          item={item} 
+          handleBooleanComplete={handleBooleanComplete} 
+          removeItem={removeItem}
+          />
         );
-      })}
+      })
+      }
     </div>
   );
 }
